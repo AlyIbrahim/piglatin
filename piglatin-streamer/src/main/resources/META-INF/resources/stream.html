@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Piglatin</title>
+
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly-additions.min.css">
+</head>
+<body>
+<div class="container">
+
+    <h2>Statements</h2>
+    <div class="row">
+    <p class="col-md-12">Last statement <strong><span id="content">N/A</span></strong>.</p>
+    </div>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    var source = new EventSource("/piglatin/stream");
+    source.onmessage = function (event) {
+        var translation = JSON.parse(event.data)
+        // var translationNode = document.createTextNode(translation.outputText);
+        // document.getElementById("content").appendChild(translationNode)
+        document.getElementById("content").innerHTML = translation.outputText
+    };
+</script>
+</html>
+
